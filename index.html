@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ozempic Day Supply Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Ozempic Day Supply Calculator</h2>
+    <label for="package-size">Package Size:</label>
+    <select id="package-size">
+      <option value="2">2mg Pen (Red/White)</option>
+      <option value="4">4mg Pen (Green/White)</option>
+      <option value="8">8mg Pen (Brown/White)</option>
+    </select>
+    <label for="dosage">Dosage:</label>
+    <select id="dosage">
+      <option value="0.25">0.25 mg/week</option>
+      <option value="0.5">0.5 mg/week</option>
+      <option value="1">1 mg/week</option>
+      <option value="2">2 mg/week</option>
+    </select>
+    <label for="quantity">Quantity Prescribed:</label>
+    <input type="number" id="quantity" min="1" placeholder="Enter quantity">
+    <button onclick="calculateDaysOfSupply()">Calculate</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateDaysOfSupply() {
+      const packageSize = document.getElementById('package-size').value;
+      const dosage = parseFloat(document.getElementById('dosage').value);
+      const quantity = parseInt(document.getElementById('quantity').value);
+
+      let totalQuantity = 0;
+      if (packageSize === '2') {
+        totalQuantity = 2; // mg
+      } else if (packageSize === '4') {
+        totalQuantity = 4; // mg
+      } else if (packageSize === '8') {
+        totalQuantity = 8; // mg
+      }
+
+      const daysOfSupply = Math.round((totalQuantity / dosage) * 7 * quantity);
+
+      document.getElementById('result').innerText = `Your Ozempic supply will last for approximately ${daysOfSupply} days.`;
+    }
+  </script>
+</body>
+</html>
